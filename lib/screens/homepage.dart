@@ -191,7 +191,9 @@ class _HomePageState extends State<HomePage> {
 
                                       child: Column(
                                         children: [
-                                          Text(documentSnapshot['name']),
+                                          Container(
+                                              alignment: Alignment.center,
+                                              child: Text(documentSnapshot['name'])),
                                         ],
                                       ),
                                     ),
