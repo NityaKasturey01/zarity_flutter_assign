@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,9 +13,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  String dropdownvalue = 'Immediate';
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  // List of items in our dropdown menu
+  var items1 = [
+    'Immediate',
+    'This Week',
+    'This Month'
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         padding: EdgeInsets.all(10),
         child: ListView(
@@ -26,8 +41,12 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 Container(
-                child: Icon(Icons.menu, size: 30,),
-                  margin: EdgeInsets.only(right: 290),
+                child: IconButton(
+                  icon:const Icon(Icons.menu), iconSize: 30,  onPressed: () {
+                    print("onclick");
+                  _scaffoldKey.currentState?.openDrawer();
+                },),
+                  margin: EdgeInsets.only(right: 260),
                 ),
                 Container(
                   alignment: Alignment.centerRight,
@@ -94,6 +113,10 @@ class _HomePageState extends State<HomePage> {
                         child: RaisedButton(
                           elevation: 1.0,
                           onPressed: (){
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => _buildPopupDialog(context),
+                            );
                           },
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(
@@ -249,6 +272,39 @@ class _HomePageState extends State<HomePage> {
         )]),
       ),
 
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+              child: Text('Setting'),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.password_sharp,
+              ),
+              title: const Text('Change Password'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.person_pin_sharp,
+              ),
+              title: const Text('Change Username'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+
       bottomNavigationBar: CurvedNavigationBar(
 
         items: <Widget>[
@@ -290,4 +346,113 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+
+
+  Widget _buildPopupDialog(BuildContext context) {
+
+
+
+    return new AlertDialog(
+
+      title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+        Text('Task List', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),),
+            DropdownButton(
+
+              // Initial Value
+              value: dropdownvalue,
+
+              // Down Arrow Icon
+              icon: const Icon(Icons.keyboard_arrow_down),
+
+              // Array list of items
+              items: items1.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownvalue = newValue!;
+                });
+              },
+            ),
+      ]),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[Center(child:
+        SizedBox(
+          height: 400,
+            width: 400,
+            child: Scrollbar(
+              child: Container(
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance.collection('task').snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    //print("stream22"+streamSnapshot.data!.docs[0]['product_name'].toString());
+                    if (streamSnapshot.hasData) {
+                      return Scrollbar(
+                          child:  SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: streamSnapshot.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              final DocumentSnapshot documentSnapshot =
+                              streamSnapshot.data!.docs[index];
+                              print("drop"+dropdownvalue);
+                              if(documentSnapshot['due_date']==dropdownvalue){
+                                return Card(
+                                  margin: const EdgeInsets.all(10),
+                                  child: ListTile(
+                                    subtitle:Text(documentSnapshot['due_date']),
+                                    trailing: SizedBox(
+                                      width: 50,
+                                      child: Row(
+                                        children: [
+                                          // Press this button to edit a single product
+                                          IconButton(
+                                            icon: const Icon(Icons.navigate_next),
+                                            onPressed: (){},),
+                                          // This icon button is used to delete a single product
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                );
+                              }else{
+                                return SizedBox(height: 0,);
+                              }
+
+                            },
+                          ))
+                      );
+
+                    }else{
+                      print("not there");
+                    }
+
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
+              ),
+            ))
+          ,)
+
+        ],
+      ),
+
+    );
+  }
+
 }
