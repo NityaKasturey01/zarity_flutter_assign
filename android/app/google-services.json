@@ -1,0 +1,166 @@
+{
+  "project_info": {
+    "project_number": "858609542846",
+    "project_id": "innobytes-agribizness",
+    "storage_bucket": "innobytes-agribizness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858609542846:android:388b45383fdd313598a0ef",
+        "android_client_info": {
+          "package_name": "com.example.agribiz_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858609542846-u07d7llcg3ochf41p9ojhfarmr4humnh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agribiz_final",
+            "certificate_hash": "778f1e73d1b720f30605317aa143c030adebf5c9"
+          }
+        },
+        {
+          "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXbp1rsca_NN3hFPTs1QCJ-MJocOt9YUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858609542846:android:a6e5f59243568c3798a0ef",
+        "android_client_info": {
+          "package_name": "com.example.zarity_flutter_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858609542846-r37lk4biednvmr70laq4iuuultdok5so.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zarity_flutter_project",
+            "certificate_hash": "778f1e73d1b720f30605317aa143c030adebf5c9"
+          }
+        },
+        {
+          "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXbp1rsca_NN3hFPTs1QCJ-MJocOt9YUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858609542846:android:e6c35d197ac1261d98a0ef",
+        "android_client_info": {
+          "package_name": "com.innobytes.agribizness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858609542846-acl490rr9v3k05oebp91lm1o0siv25ut.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.innobytes.agribizness",
+            "certificate_hash": "778f1e73d1b720f30605317aa143c030adebf5c9"
+          }
+        },
+        {
+          "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXbp1rsca_NN3hFPTs1QCJ-MJocOt9YUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858609542846:android:95577f7b752ad52498a0ef",
+        "android_client_info": {
+          "package_name": "com.innobytes.agribizness_final3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858609542846-c9o7ifoddo92qq71nmo50je1m6msef5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.innobytes.agribizness_final3",
+            "certificate_hash": "3bb43b9639afbd08cfc9f181e0baa73f730acc32"
+          }
+        },
+        {
+          "client_id": "858609542846-etarv1qdm75d0vf9nm1q3tfgareifpqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.innobytes.agribizness_final3",
+            "certificate_hash": "778f1e73d1b720f30605317aa143c030adebf5c9"
+          }
+        },
+        {
+          "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXbp1rsca_NN3hFPTs1QCJ-MJocOt9YUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858609542846-c4kvvv2f2llrnudjkgbdo87k88fu80h9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

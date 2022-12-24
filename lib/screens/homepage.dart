@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +16,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(10),
-        child: Column(
+        child: ListView(
+        shrinkWrap: true,
+        children:[Column(
           children: [
             Container(
               height: 50,
@@ -134,9 +138,155 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-            )
+            ),
+
+            ListView(
+              shrinkWrap: true,
+            children:[Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Container(
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance.collection('task').snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    //print("stream22"+streamSnapshot.data!.docs[0]['product_name'].toString());
+                    if (streamSnapshot.hasData) {
+                      return Scrollbar(
+                          child: Column(
+                            children: [
+                              GridView.builder(
+                                shrinkWrap: true,
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                                itemCount: streamSnapshot.data!.docs.length,
+                                padding: EdgeInsets.all(2.0),
+                                itemBuilder: (BuildContext context, int index) {
+                                  final DocumentSnapshot documentSnapshot =
+                                  streamSnapshot.data!.docs[index];
+                                  return Container(
+                                    child: Card(
+                                      color: Colors.amberAccent,
+
+                                      child: Column(
+                                        children: [
+                                          Text(documentSnapshot['name']),
+                                        ],
+                                      ),
+                                    ),
+                                    padding: EdgeInsets.all(2.0),
+                                  );
+                                },
+                              ),
+
+                            ],
+                          )
+                      );
+
+                    }else{
+                      print("not there");
+                    }
+
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
+              ),
+            )]),
+
+          Container(
+                  margin: EdgeInsets.only(top: 30),
+                  child: Scrollbar(
+                    child: Container(
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection('task').snapshots(),
+                      builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                        //print("stream22"+streamSnapshot.data!.docs[0]['product_name'].toString());
+                        if (streamSnapshot.hasData) {
+                          return Scrollbar(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: streamSnapshot.data!.docs.length,
+                                    itemBuilder: (context, index) {
+                                      final DocumentSnapshot documentSnapshot =
+                                      streamSnapshot.data!.docs[index];
+                                      return Card(
+                                        margin: const EdgeInsets.all(10),
+                                        child: ListTile(
+                                          title: Text(documentSnapshot['name']),
+                                          subtitle:Text("Rs "+documentSnapshot['name']),
+                                          trailing: SizedBox(
+                                            width: 50,
+                                            child: Row(
+                                              children: [
+                                                // Press this button to edit a single product
+                                                IconButton(
+                                                  icon: const Icon(Icons.add_shopping_cart),
+                                                  onPressed: (){},),
+                                                // This icon button is used to delete a single product
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+
+                                      );
+                                    },
+                                  )
+
+                          );
+
+                        }else{
+                          print("not there");
+                        }
+
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    ),
+                  ),
+                ))
           ],
-        ),
+        )]),
+      ),
+
+      bottomNavigationBar: CurvedNavigationBar(
+
+        items: <Widget>[
+          Icon(Icons.home, size: 25),
+          Icon(Icons.category_sharp, size: 25),
+          Icon(Icons.add_shopping_cart, size: 25),
+          Icon(Icons.person, size: 25),
+        ],
+        color: Colors.white,
+        buttonBackgroundColor: Colors.white,
+        backgroundColor: Colors.orangeAccent,
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 600),
+        //currentIndex: _selectedIndex,
+        //unselectedItemColor: Colors.black54,
+        //selectedItemColor: Colors.amber[800],
+        //onTap: _onItemTapped,
+        onTap: (index) {
+          setState(() {
+            // if (index==1 || index==0)
+            // {_page = index;
+            // _selectedIndex = index;
+            // print("mob_no index: "+index.toString());
+            // }
+            // if (index==3){
+            //   _page = 2;
+            //   _selectedIndex = 3;
+            //   print("mob_nohere");
+            //   getData();
+            //   print("mob_no: val"+profileName);
+            //   myController.text=profileName;
+            //   print("mob_no: "+myController.text);
+            // } if (index==2){
+            //   _selectedIndex=2;
+            // }
+          });
+        },
+
       ),
     );
   }
